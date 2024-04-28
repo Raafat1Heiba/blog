@@ -15,7 +15,9 @@ const UserPost = ({
   imageSrc,
   postID,
   posts,
+  postedBy,
   setPosts,
+  userId,
 }) => {
   const [liked, setLiked] = useState(false);
   const [title, setTitle] = useState(null);
@@ -123,7 +125,7 @@ const UserPost = ({
               <Text fontSize={"sm"} color={"gray.lighgt"}>
                 1d
               </Text>
-              <BsThreeDots onClick={onOpen} />
+              {postedBy === userId && <BsThreeDots onClick={onOpen} />}
             </Flex>
           </Flex>
           <Text fontSize={"sm"}>{title}</Text>

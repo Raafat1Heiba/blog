@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/button";
 import Comment from "../components/Comment";
 import userAtom from "../atoms/userAtom";
+import { useParams } from "react-router-dom";
 // import { useSetRecoilState } from "recoil";
 
 const PostPage = () => {
-  const [user, setUser] = useRecoilState(userAtom);
-
+  const { username } = useParams();
+  console.log(username);
   const [liked, setLiked] = useState(false);
   const fetchUserPosts = async () => {
     try {

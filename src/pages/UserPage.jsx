@@ -20,20 +20,21 @@ const UserPage = () => {
   const fetchUserPosts = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3001/api/posts/${user._id}/user`
+        `http://localhost:3001/api/posts/${username}/user`
       );
       const data = await res.json();
       setPosts(data);
       console.log(posts);
-      console.log(user);
+      console.log(data);
       // console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     fetchUserPosts();
-  }, [posts]);
+  }, []);
   useEffect(() => {
     const getUser = async () => {
       try {
@@ -58,7 +59,8 @@ const UserPage = () => {
     };
 
     getUser();
-  }, [username, showToast]);
+  }, []);
+
   if (!user && loading) {
     return (
       <Flex justifyContent={"center"}>
@@ -80,10 +82,12 @@ const UserPage = () => {
               postImg={p.image}
               postTitle={p.text}
               postID={p._id}
+              postBy={p.postedBy}
               username={user.username}
               imageSrc={user.profilePic}
               posts={posts}
               setPosts={setPosts}
+              userId={user._id}
             />
           );
         })}

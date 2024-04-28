@@ -14,11 +14,13 @@ const Post = ({ post, postedBy }) => {
   const navigate = useNavigate();
   useEffect(() => {
     const getUser = async () => {
+      console.log(post);
       try {
         const res = await fetch(
           "http://localhost:3001/api/users/profile/" + postedBy
         );
         const data = await res.json();
+        console.log(data);
         if (data.error) {
           showToast("Error", data.error, "error");
           return;
@@ -35,7 +37,7 @@ const Post = ({ post, postedBy }) => {
   if (!user) return null;
   return (
     <>
-      <Link to={`/${user.username}/post/${post._id}`}>
+      <Link to={`/${user._id}/post/${post._id}`}>
         {" "}
         <Flex gap={3} mb={4} py={5}>
           <Flex flexDirection={"column"} alignItems={"center"}>
@@ -45,7 +47,7 @@ const Post = ({ post, postedBy }) => {
               src={user?.profilePic}
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/${user.username}`);
+                navigate(`/${user._id}`);
               }}
             />
             <Box w={"1px"} h={"full"} bg={"gray.light"} my={2}></Box>
@@ -96,7 +98,7 @@ const Post = ({ post, postedBy }) => {
                   fontWeight={"bold"}
                   onClick={(e) => {
                     e.preventDefault();
-                    navigate(`/${user.username}`);
+                    navigate(`/${user._id}`);
                   }}
                 >
                   {user?.username}

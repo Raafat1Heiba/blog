@@ -22,7 +22,7 @@ export const Header = () => {
         onClick={toggleColorMode}
       ></Image>
       {user && (
-        <Link as={RouterLink} to={`/${user.username}`}>
+        <Link as={RouterLink} to={`/${user._id}`}>
           <RxAvatar size={24} />
         </Link>
       )}
